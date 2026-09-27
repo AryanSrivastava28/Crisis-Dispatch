@@ -32,7 +32,7 @@ DATABASE_URL = os.getenv("DATABASE_URL")
 
 def get_db_connection():
     # Use sslmode=require for Supabase
-    return psycopg2.connect(DATABASE_URL, sslmode='require')
+    return psycopg2.connect(DATABASE_URL)
 
 def init_db():
     try:
@@ -151,7 +151,7 @@ class DispatchState(TypedDict):
     police_dispatch: Optional[dict]
 # Initialize the LLM for Triage and the Embedding model for FAISS
 llm = ChatGroq(
-    model="llama-3.3-70b-versatile", 
+    model="openai/gpt-oss-120b", 
     temperature=0
 )# embeddings_model = HuggingFaceEndpointEmbeddings(
 #     model="sentence-transformers/all-MiniLM-L6-v2",

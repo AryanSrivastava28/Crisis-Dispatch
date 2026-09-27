@@ -25,11 +25,12 @@ function initMap() {
   });
 
   L.tileLayer(
-    "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
-    {
-      maxZoom: 19,
-    },
-  ).addTo(map);
+  "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+  {
+    maxZoom: 19,
+    attribution: '&copy; OpenStreetMap contributors',
+  },
+).addTo(map);
 
   L.control.zoom({ position: "topright" }).addTo(map);
 
@@ -108,9 +109,10 @@ function detectLocation() {
       setUserMarker(latitude, longitude);
     },
     (err) => {
-      statusEl.innerText = "❌ Denied";
-      statusEl.className = "gps-status denied";
-    }
+  console.log("GPS Error:", err.code, err.message);
+  statusEl.innerText = "❌ " + err.message;
+  statusEl.className = "gps-status denied";
+}
   );
 }
 
